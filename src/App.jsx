@@ -23,8 +23,9 @@ const INITIAL_DATA = [
 ];
 function App() {
 	const [items, setItems] = useState(INITIAL_DATA);
+	
 	const addItem = item => {
-		setItems(oldItems => [...oldItems, item = {
+		setItems(oldItems => [...oldItems, {
 			title: item.title,
 			text: item.text,
 			date: new Date(item.date),
