@@ -8,18 +8,18 @@ import LeftPanel from './components/layouts/LeftPanel/LeftPanel';
 import JornalForm from './components/JornalForm/JornalForm';
 
 const INITIAL_DATA = [
-	// {
-	// 	id: 1,
-	// 	title: 'Подготовка к обновлению курсов',
-	// 	text: 'Горные походы открывают удивительные ландшафты',
-	// 	date: new Date()
-	// },
-	// {
-	// 	id: 2,
-	// 	title: 'Поход в годы',
-	// 	text: 'Думал, что очень много времени...',
-	// 	date: new Date()
-	// }
+	{
+		id: 1,
+		title: 'Подготовка к обновлению курсов',
+		text: 'Горные походы открывают удивительные ландшафты',
+		date: new Date()
+	},
+	{
+		id: 2,
+		title: 'Поход в годы',
+		text: 'Думал, что очень много времени...',
+		date: new Date()
+	}
 ];
 function App() {
 	const [items, setItems] = useState(INITIAL_DATA);
