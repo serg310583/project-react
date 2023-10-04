@@ -1,10 +1,10 @@
-import './Header.css';
+import styles from './Header.module.css';
 
 
 function Header() {
 	return ( 
 		<>
-			<a className='header-link' href="#">Personal Jornal</a>
+			<a className={styles['header-Link']} href="#">Personal Jornal</a>
 		</>
 	);
 }

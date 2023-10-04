@@ -1,10 +1,10 @@
 import CardButton from '../CardButton/CardButton';
-import './JornalAddButton.css';
+import styles from './JornalAddButton.module.css';
 
 
 function JornalAddButton() {
 	return ( 
-		<CardButton className='jornal-add'>+ Новое воспоминание</CardButton>
+		<CardButton className={styles['jornal-add']}>+ Новое воспоминание</CardButton>
 	);
 }
   

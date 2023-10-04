@@ -1,11 +1,11 @@
-import './Button.css';
+import styles from './Button.module.css';
 
 
 
 function Button({ text }) {
 	
 	return ( 
-		<button className='button accent'>{text}</button>
+		<button className={`${styles.button} ${styles.accent}`}>{text}</button>
 	);
 }
   

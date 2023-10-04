@@ -1,5 +1,4 @@
-import './JornalForm.css';
-
+import styles from './JornalForm.module.css';
 import Button from '../Button/Button';
 import { useState } from 'react';
 
@@ -8,7 +7,7 @@ function JornalForm({ onSubmit }) {
 	//стейт валидации формы
 	const [formValidState, setFormValidState]= useState({
 		title: true,
-		text: true,
+		post: true,
 		date: true
 	});
 	// получение данных из формы 	
@@ -23,10 +22,10 @@ function JornalForm({ onSubmit }) {
 			setFormValidState(state => ({...state, title: false}));
 			isFormValid = false;
 		} else {setFormValidState(state => ({...state, title: true}));}
-		if (!formProps.text?.trim().length){
-			setFormValidState(state => ({...state, text: false}));
+		if (!formProps.post?.trim().length){
+			setFormValidState(state => ({...state, post: false}));
 			isFormValid = false;
-		} else {setFormValidState(state => ({...state, text: true}));}
+		} else {setFormValidState(state => ({...state, post: true}));}
 		if (!formProps.date){
 			setFormValidState(state => ({...state, date: false}));
 			isFormValid = false;
@@ -40,11 +39,11 @@ function JornalForm({ onSubmit }) {
 
 	return ( 
 		
-		<form className='jornal-form' onSubmit={addJornalItem}>
-			<input type="text" name='title' style={ {border: formValidState.title ? undefined : '1px solid red'} }/>
-			<input type="date" name='date' style={ {border: formValidState.date ? undefined : '1px solid red'} }/>
-			<input type="text" name='text' style={ {border: formValidState.text ? undefined : '1px solid red'} }/>
-			<textarea name="post" id="" cols="30" rows="10"></textarea>
+		<form className={styles['jornal-form']} onSubmit={addJornalItem}>
+			<input type="text" name='title'className={`${styles['input']} ${formValidState.title ? '' : styles['invalid']}`}/>
+			<input type="date" name='date' className={`${styles['input']} ${formValidState.date ? '' : styles['invalid']}`}/>
+			<input type="text" name='tag' />
+			<textarea name="post" id="" cols="30" rows="10" className={`${styles['input']} ${formValidState.post ? '' : styles['invalid']}`}></textarea>
 			<Button text="Сохранить"/>
 		</form>		
 	);

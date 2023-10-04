@@ -1,10 +1,12 @@
-import './CardButton.css';
+import styles from './CardButton.module.css';
 
 
-function CardButton({children, className}) {
-	const cl = 'card-button' + (className ? ' '+className : '');
+function CardButton({children}) {
+	
 	return ( 
-		<button className={cl}>
+		
+		<button className={`${styles['card-button']} `} >
+
 			{children}
 		</button>
 	);
