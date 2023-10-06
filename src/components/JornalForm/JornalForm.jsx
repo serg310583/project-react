@@ -1,16 +1,31 @@
 import styles from './JornalForm.module.css';
 import Button from '../Button/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import cn from 'classnames';
 
+const INITIAL_STATE = {
+	title: true,
+	post: true,
+	date: true
+};
 
 function JornalForm({ onSubmit }) {
 	//стейт валидации формы
-	const [formValidState, setFormValidState]= useState({
-		title: true,
-		post: true,
-		date: true
-	});
+	const [formValidState, setFormValidState]= useState(INITIAL_STATE);
+
+	useEffect(() => {
+		let timerId;
+		if (!formValidState.date || !formValidState.post || !formValidState.title){
+			timerId = setTimeout(() => {
+				console.log('Очистка состояния');
+				setFormValidState(INITIAL_STATE);
+			}, 2000);
+		}
+		return () => {
+			clearTimeout(timerId);
+		};
+	}, [formValidState]);
+
 	// получение данных из формы 	
 	const addJornalItem = (e) => {
 		e.preventDefault();
@@ -41,13 +56,31 @@ function JornalForm({ onSubmit }) {
 	return ( 
 		
 		<form className={styles['jornal-form']} onSubmit={addJornalItem}>
-			<input type="text" name='title'className={cn(styles['input'], {
-				[styles['invalid']]:!formValidState.title
-			})}/>
-			<input type="date" name='date' className={cn(styles['input'], {
-				[styles['invalid']]:!formValidState.date
-			})}/>
-			<input type="text" name='tag' />
+			<div>
+				<input type="text" name='title'className={cn(styles['input-title'], {
+					[styles['invalid']]:!formValidState.title
+				})}/>
+			</div>
+			<div className={styles['form-row']} >
+				<label htmlFor="date" className={styles['form-lable']} >
+					<img src="/calendar.svg" alt="Иконка календаря" />
+					<span className={styles['legend-row']}>Дата</span>
+				</label>
+				<input type="date" name='date' id='date' className={cn(styles['input'], {
+					[styles['invalid']]:!formValidState.date})}/>
+			</div>
+
+			<div className={styles['form-row']} >
+				<label htmlFor="tag" className={styles['form-lable']} >
+					<img src="/folder.svg" alt="Иконка папки" />
+					<span className={styles['legend-row']}>Метки</span>
+				</label>
+				<input type="text" name='tag' className={styles['input']} />
+			</div>
+			
+			
+			
+			
 			<textarea name="post" id="" cols="30" rows="10" className={cn(styles['input'], {
 				[styles['invalid']]:!formValidState.post
 			})}></textarea>

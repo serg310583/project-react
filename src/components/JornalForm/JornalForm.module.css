@@ -12,7 +12,44 @@ input, textarea {
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
+
+.input-title {
+    border: none;
+    background: none;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-family: 'Source Sans 3', sans-serif;
+    border-bottom: 1px solid rgb(112, 112, 112);
+    width: 100%;
+}
+.form-lable {
+    display: flex;
+    align-items: center;
+    min-width: 50px;
+}
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.legend-row {
+    margin-left: 15px;
+}
+.input {
+    border: none;
+    background: none;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;    
+    font-family: 'Source Sans 3', sans-serif;
+    border-bottom: 1px solid rgb(112, 112, 112);
+    width: 100%;
+}
 .invalid {
     border: 1px solid red;
-    background: rgb(68, 6, 6);
+    background: rgb(227, 173, 173);
 }
+
