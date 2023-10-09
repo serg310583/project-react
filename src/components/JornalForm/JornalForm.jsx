@@ -23,33 +23,35 @@ function JornalForm({ onSubmit }) {
 	useEffect(() => {
 		if(isFormReadyToSubmit) {
 			onSubmit(values);
+			dispatchForm({ type: 'CLEAR' });			
 		}
+		
 	}, [isFormReadyToSubmit]);
 
+	const onChange = (e) => {
+		dispatchForm({ type: 'SET_VALUE', payload: { [e.target.name]: e.target.value}});
+	};
 	// получение данных из формы 	
-	const addJornalItem = (e) => {
-		e.preventDefault();
-		const formData = new FormData(e.target);
-		const formProps = Object.fromEntries(formData);
-		dispatchForm({ type: 'SUBMIT', payload: formProps});
-		
-		
+	const addJornalItem = (e) => {	
+		e.preventDefault();	
+		dispatchForm({ type: 'SUBMIT' });		
 	};	
 
 	return ( 
 		
 		<form className={styles['jornal-form']} onSubmit={addJornalItem}>
 			<div>
-				<input type="text" name='title'className={cn(styles['input-title'], {
+				<input type="text" onChange={onChange} value={values.title} name='title'className={cn(styles['input-title'], {
 					[styles['invalid']]:!isValid.title
 				})}/>
 			</div>
+
 			<div className={styles['form-row']} >
 				<label htmlFor="date" className={styles['form-lable']} >
 					<img src="/calendar.svg" alt="Иконка календаря" />
 					<span className={styles['legend-row']}>Дата</span>
 				</label>
-				<input type="date" name='date' id='date' className={cn(styles['input'], {
+				<input type="date" onChange={onChange} value={values.date} name='date' id='date' className={cn(styles['input'], {
 					[styles['invalid']]:!isValid.date})}/>
 			</div>
 
@@ -58,9 +60,10 @@ function JornalForm({ onSubmit }) {
 					<img src="/folder.svg" alt="Иконка папки" />
 					<span className={styles['legend-row']}>Метки</span>
 				</label>
-				<input type="text" name='tag' className={styles['input']} />
+				<input type="text" onChange={onChange} value={values.tag} name='tag' className={styles['input']} />
 			</div>
-			<textarea name="post" id="" cols="30" rows="10" className={cn(styles['input'], {
+			
+			<textarea name="post" onChange={onChange} value={values.post} id="" cols="30" rows="10" className={cn(styles['input'], {
 				[styles['invalid']]:!isValid.post
 			})}></textarea>
 			<Button text="Сохранить"/>
